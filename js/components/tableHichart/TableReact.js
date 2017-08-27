@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {repositories} from '../../mocks';
 import PropTypes from 'prop-types'
-import {List, ListItem, TextField} from 'material-ui';
+
 import {
   Table,
   TableBody,
@@ -10,80 +10,76 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-// import CheckAuthorization from '../../hoc/check-authorization';
 
 import styles from './tableStyle.scss';
 
-class Rtable extends Component {
+class RepRaws extends Component {
 
-  render () {
-    return (
-      <TableRowColumn className={styles.article}>
-        <div>{this.props.item.id}</div>
-        <div>{this.props.item.name}</div>
-        <div>{this.props.item.description}</div>
-      </TableRowColumn>
-    );
-  }
-}
-
-class Articles extends Component {
-
-  render () {
-    return (
-      <h1>TBD</h1>
-    );
-  }
-}
-
-export default class TableExampleControlled extends Component {
-    state = {
-        selected: [1],
-    };
-
-    isSelected = (index) => {
-        return this.state.selected.indexOf(index) !== -1;
-    };
-
-    handleRowSelection = (selectedRows) => {
-        this.setState({
-            selected: selectedRows,
-        });
-    };
-
-    render() {
+    render () {
         return (
-            <Table onRowSelection={this.handleRowSelection}>
-                <TableHeader>
-                    <TableRow>
-                        <TableHeaderColumn>ID</TableHeaderColumn>
-                        <TableHeaderColumn>Name</TableHeaderColumn>
-                        <TableHeaderColumn>Status</TableHeaderColumn>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    <TableRow selected={this.isSelected(0)}>
-                        <TableRowColumn>1</TableRowColumn>
-                        <TableRowColumn>John Smith</TableRowColumn>
-                        <TableRowColumn>Employed</TableRowColumn>
-                    </TableRow>
-                    <TableRow selected={this.isSelected(1)}>
-                        <TableRowColumn>2</TableRowColumn>
-                        <TableRowColumn>Randal White</TableRowColumn>
-                        <TableRowColumn>Unemployed</TableRowColumn>
-                    </TableRow>
-                    <TableRow selected={this.isSelected(2)}>
-                        <TableRowColumn>3</TableRowColumn>
-                        <TableRowColumn>Stephanie Sanders</TableRowColumn>
-                        <TableRowColumn>Employed</TableRowColumn>
-                    </TableRow>
-                    <TableRow selected={this.isSelected(3)}>
-                        <TableRowColumn>4</TableRowColumn>
-                        <TableRowColumn>Steve Brown</TableRowColumn>
-                        <TableRowColumn>Employed</TableRowColumn>
-                    </TableRow>
-                </TableBody>
-            </Table>
+            <TableRow>
+                <TableRowColumn> {this.props.item.id} </TableRowColumn>
+                <TableRowColumn> {this.props.item.name} </TableRowColumn>
+                <TableRowColumn> {this.props.item.description} </TableRowColumn>
+            </TableRow>
+        );
+    }
+}
+
+
+export default class TableWithData extends Component {
+    constructor (...args) {
+        super(...args);
+        console.log(repositories.items)
+
+
+        this.state = {
+            repositories,
+            id: '',
+            name: '',
+            description: '',
+            stargazers_count: '',
+            watchers_count: '',
+            forks: '',
+            open_issues: '',
+            displayRowCheckboxes: true
+        };
+    }
+    render () {
+        console.log(repositories)
+        return (
+            <div>
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHeaderColumn>id</TableHeaderColumn>
+                            <TableHeaderColumn>name</TableHeaderColumn>
+                            <TableHeaderColumn>description</TableHeaderColumn>
+                            <TableHeaderColumn>count</TableHeaderColumn>
+                            <TableHeaderColumn>watchers</TableHeaderColumn>
+                            <TableHeaderColumn>forks</TableHeaderColumn>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody stripedRows={true} >
+                        {/*{ this.state.repositories.map(item => <RepRaws key={item.id} item={item} />) }*/}
+                        {/*{ this.state.articles.map(item => <RepRaws key={item.id} item={item}  />) }*/}
+                        {this.state.repositories.items.map((item, i) =>
+                            <TableRow rowNumber={5} key={i} value={item}>
+                                <TableRowColumn>{item.id}</TableRowColumn>
+                                <TableRowColumn>{item.name}</TableRowColumn>
+                                <TableRowColumn>{item.description}</TableRowColumn>
+                                <TableRowColumn>{item.stargazers_count}</TableRowColumn>
+                                <TableRowColumn>{item.watchers_count}</TableRowColumn>
+                                <TableRowColumn>{item.forks}</TableRowColumn>
+
+
+
+                            </TableRow>
+                        )}
+
+                    </TableBody>
+                </Table>
+            </div>
         );
     }
 }
@@ -102,40 +98,6 @@ const TableHeaderContents = () => (
 
         );
 
-const TableContents = () => (
-    <Table>
-            <TableHeaderContents/>
-        <TableBody>
-            <TableRow>
-                <TableRowColumn>1</TableRowColumn>
-                <TableRowColumn>John Smith</TableRowColumn>
-                <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-                <TableRowColumn>2</TableRowColumn>
-                <TableRowColumn>Randal White</TableRowColumn>
-                <TableRowColumn>Unemployed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-                <TableRowColumn>3</TableRowColumn>
-                <TableRowColumn>Stephanie Sanders</TableRowColumn>
-                <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-                <TableRowColumn>4</TableRowColumn>
-                <TableRowColumn>Steve Brown</TableRowColumn>
-                <TableRowColumn>
-                    ableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-                <TableRowColumn>5</TableRowColumn>
-                <TableRowColumn>Christopher Nolan</TableRowColumn>
-                <TableRowColumn>Unemployed</TableRowColumn>
-            </TableRow>
-        </TableBody>
-    </Table>
-);
 
 
 
-export default TableExampleControlled;
