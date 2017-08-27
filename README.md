@@ -1,5 +1,8 @@
 # homework
 
+## Module #1 - Please implement simple comparison module. [Example](https://github.com/ITEAHub-bootcamp/github-libs-comparison-26-08-17)
+
+
 List of useful links
 * [presentation](https://goo.gl/DMxews)
 * [react documentation](https://facebook.github.io/react/docs)
