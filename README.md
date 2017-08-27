@@ -7,5 +7,5 @@ List of useful links
 
 For adding homework:
 * fork repo
-* create branche named [firstName]-[lastName]
+* create branch named [firstName]_[lastName] (example: volodymyr_shevchuk)
 * add pull request to this repo
