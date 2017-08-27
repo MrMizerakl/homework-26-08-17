@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Statistics from './components/statistics';
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-ReactDOM.render(<Statistics />, document.getElementById('root'));
+const App = () => (
+  <MuiThemeProvider>
+    <Statistics />
+  </MuiThemeProvider>
+);
+
+ReactDOM.render(<App />, document.getElementById('root'));
