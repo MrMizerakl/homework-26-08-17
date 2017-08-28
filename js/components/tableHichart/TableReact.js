@@ -13,25 +13,40 @@ import {
 
 import styles from './tableStyle.scss';
 
-class RepRaws extends Component {
-
-    render () {
-        return (
-            <TableRow>
-                <TableRowColumn> {this.props.item.id} </TableRowColumn>
-                <TableRowColumn> {this.props.item.name} </TableRowColumn>
-                <TableRowColumn> {this.props.item.description} </TableRowColumn>
-            </TableRow>
-        );
-    }
-}
+// class RepRaws extends Component {
+//     static propTypes = {
+//         value: PropTypes.shape({
+//             id: PropTypes.string.isRequired,
+//             name: PropTypes.string.isRequired,
+//             description: PropTypes.string.isRequired,
+//             stargazers_count: PropTypes.string.isRequired,
+//             watchers_count: PropTypes.string.isRequired,
+//             forks: PropTypes.string.isRequired,
+//             open_issues: PropTypes.string.isRequired,
+//
+//         }).isRequired,
+//         deleteItem: PropTypes.func
+//     };
+//
+//     render () {
+//         return (
+//             <TableRow key ={this.props.i} value={this.props.item}>
+//                 <TableRowColumn> {this.props.value.id} </TableRowColumn>
+//                 <TableRowColumn> {this.props.value.name} </TableRowColumn>
+//                 <TableRowColumn> {this.props.value.description} </TableRowColumn>
+//                 <TableRowColumn>{this.props.value.stargazers_count}</TableRowColumn>
+//                 <TableRowColumn>{this.props.value.watchers_count}</TableRowColumn>
+//                 <TableRowColumn>{this.props.value.forks}</TableRowColumn>
+//                 <TableRowColumn>{this.props.value.open_issues}</TableRowColumn>
+//             </TableRow>
+//         );
+//     }
+// }
 
 
 export default class TableWithData extends Component {
     constructor (...args) {
         super(...args);
-        console.log(repositories.items)
-
 
         this.state = {
             repositories,
@@ -41,16 +56,14 @@ export default class TableWithData extends Component {
             stargazers_count: '',
             watchers_count: '',
             forks: '',
-            open_issues: '',
-            displayRowCheckboxes: true
+            open_issues: ''
         };
     }
     render () {
-        console.log(repositories)
         return (
             <div>
-                <Table>
-                    <TableHeader>
+                <Table multiSelectable={true}>
+                    <TableHeader displaySelectAll={false}>
                         <TableRow>
                             <TableHeaderColumn>id</TableHeaderColumn>
                             <TableHeaderColumn>name</TableHeaderColumn>
@@ -58,23 +71,26 @@ export default class TableWithData extends Component {
                             <TableHeaderColumn>count</TableHeaderColumn>
                             <TableHeaderColumn>watchers</TableHeaderColumn>
                             <TableHeaderColumn>forks</TableHeaderColumn>
+                            <TableHeaderColumn>open_issues</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
-                    <TableBody stripedRows={true} >
-                        {/*{ this.state.repositories.map(item => <RepRaws key={item.id} item={item} />) }*/}
-                        {/*{ this.state.articles.map(item => <RepRaws key={item.id} item={item}  />) }*/}
+                    <TableBody stripedRows={true}>
+                        {/*{ this.state.repositories.items.map((item,i) => {if (i<5) return( <RepRaws key={i} value={item} />) })}*/}
+                        {/*{ this.state.repositories.items.map(item => <RepRaws key={item.id} value={item}  />) }*/}
                         {this.state.repositories.items.map((item, i) =>
-                            <TableRow rowNumber={5} key={i} value={item}>
+                        {if (i<5) return(
+                            <TableRow key={i} value={item}>
                                 <TableRowColumn>{item.id}</TableRowColumn>
                                 <TableRowColumn>{item.name}</TableRowColumn>
                                 <TableRowColumn>{item.description}</TableRowColumn>
                                 <TableRowColumn>{item.stargazers_count}</TableRowColumn>
                                 <TableRowColumn>{item.watchers_count}</TableRowColumn>
                                 <TableRowColumn>{item.forks}</TableRowColumn>
-
-
+                                <TableRowColumn>{item.open_issues}</TableRowColumn>
 
                             </TableRow>
+
+                        )}
                         )}
 
                     </TableBody>
@@ -85,18 +101,18 @@ export default class TableWithData extends Component {
 }
 
 
-const TableHeaderContents = () => (
-        <TableRow>
-            <TableHeaderColumn>ID</TableHeaderColumn>
-            <TableHeaderColumn>Name</TableHeaderColumn>
-            <TableHeaderColumn>Description</TableHeaderColumn>
-            <TableHeaderColumn>stargazers_count</TableHeaderColumn>
-            <TableHeaderColumn>watchers</TableHeaderColumn>
-            <TableHeaderColumn>folks</TableHeaderColumn>
-        </TableRow>
-
-
-        );
+// const TableHeaderContents = () => (
+//         <TableRow>
+//             <TableHeaderColumn>ID</TableHeaderColumn>
+//             <TableHeaderColumn>Name</TableHeaderColumn>
+//             <TableHeaderColumn>Description</TableHeaderColumn>
+//             <TableHeaderColumn>stargazers_count</TableHeaderColumn>
+//             <TableHeaderColumn>watchers</TableHeaderColumn>
+//             <TableHeaderColumn>folks</TableHeaderColumn>
+//         </TableRow>
+//
+//
+//         );
 
 
 
