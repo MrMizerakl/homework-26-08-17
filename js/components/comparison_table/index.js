@@ -8,7 +8,6 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 
-import {repositories} from '../../mocks';
 import compare_table_style from './table.scss';
 
 import Tr from '../table_row';
@@ -17,7 +16,6 @@ export default class ComparisonTable extends Component {
   constructor(...args) {
     super(...args)
     this.state = {
-      repos: repositories,
       selectable: true,
       multiSelectable: true,
       showRowHover: true
@@ -43,7 +41,7 @@ export default class ComparisonTable extends Component {
           </TableRow>
         </TableHeader>
         <TableBody>
-          { this.state.repos.items.map( repo => { return <Tr key={repo.id} item={repo} /> } )}
+          { this.props.repos.items.map( repo => { return <Tr key={repo.id} item={repo} /> } )}
         </TableBody>
       </Table>
     );
